@@ -1,2 +1,2 @@
-* Módulo 0 - Seminario Previo
+# Módulo 0 - Seminario Previo
 
