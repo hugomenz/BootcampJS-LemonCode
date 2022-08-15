@@ -6,14 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
-    <h1>Hola Mundo</h1>
-    <button type="button" onclick="window.alert('Hola desde JS')">Mostrar mensaje</button>
+    <h1 id="demo">Hola Mundo</h1>
+    <!-- <button type="button" onclick="document.getElementById('demo').innerHTML = 'Hola desde JS'">Mostrar mensaje</button> -->   <!-- cambia HTML -->
+   <!--  <button type="button" onclick="document.getElementById('demo').style.textTransform = 'lowercase'">Mostrar mensaje</button>  -->     <!-- cambia fuente -->
+    <button type="button" onclick="document.getElementById('demo').style.display = 'none'">Mostrar mensaje</button>        <!-- oculta texto -->
 
-    <script>
-        window.alert("Hola desde una etiqueta script")
-    </script>
-
-    <script src="demo.js"></script>
+<script src = "js/demo.js"></script>
 </body>
+
 </html>
