@@ -1,0 +1,57 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+input {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0 32px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.container {
+    width: 50%;
+    margin: auto;
+}
+
+.data,
+.actions {
+    padding: 16px;
+}
+
+.img {
+    text-align: center;
+    margin: 24px 0 12px 0;
+    position: relative;
+}
+
+img.avatar {
+    width: 20%;
+    border-radius: 50%;
+}
+
+button {
+    background-color: #c7b93e;
+    border: none;
+    color: white;
+    padding: 10px 24px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;        /* OPCIÓN: cambia el cursor */
+                            /* al pasar por encima del botón */
+}
+
+.update-button:hover {  /* Oscurece el boton al pasar por encima*/
+    background-color: #91861c
+}
+
+.update-button:active {     /* Animación del botón al hacer click */
+    position: relative;     
+    top: 1px;
+}
+
+
