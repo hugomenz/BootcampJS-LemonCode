@@ -1,4 +1,4 @@
-console.log("# Ejercicio 1_1. Calculo de iva total")
+console.log("# 1. Cálculo IVA sin funciones")
 
 let iva = 0.21;
 const product = { count: 3, price: 12.55, type: "ropa" };

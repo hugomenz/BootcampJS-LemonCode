@@ -1,4 +1,4 @@
-console.log("# Ejercicio 1_2. Calculo  iva usando funciones")
+console.log("# 2. Cálculo IVA usando funciones")
 
 // poduct declarado en el fichero m3_ej1_1_iva.js
 // const product = { count: 3, price: 12.55, type: "ropa" };
