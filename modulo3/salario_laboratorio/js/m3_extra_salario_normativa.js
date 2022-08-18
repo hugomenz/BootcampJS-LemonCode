@@ -1,19 +1,35 @@
 console.log("# 2. Calcular sueldo según normativa actual")
 
-// se toma el valor del fichero m3_ej1_1_salario
+// Al definir los hijos del empleado se podrían crean tantos objetos como hijos tenga
+// construyendolo como por ejemplo: 
+// {anyoNacimiento: 2018, computadoEntero: true, discapacidad: 0, movilidadReducida:false}
+// Complicaria mucho las cosas y la verdad que para casos "ideales" (a la hora de escribir el codigo)
+// facilita mucho las cosas.
 
-// 70000 --> retencion 28.33
+// Para el calculo, se han ignorado muchos gastos deducibles. Los mas comunes
+// se han tenido en cuenta.
+
+// Adjunto, en la carpeta de files se encuentra:
+// - el PDF de hacienda de las retenciones2022
+//  -- files/retenciones2022.pdf
+// - dos ejemplos usando el programa de hacienda para retencion de IRPF 2022
+//  -- ver files/ejemplo1.pdf y files/ejemplo2.pdf
 const empleado = {
-    edad: 32,
-    bruto: 26000, 
+    edad: 66,
+    bruto: 75000, 
     baseCotizacion: 1800,  
     minGastosDificilJustificar: 2000,
-    hijos: 2,
-    numeroHijosMenorTresAnyos: 1, 
-    numeroHijosMayor25: 0,
+    hijos: 4,
+    numeroHijosMenorTresAnyos: 2, 
+    numeroHijosMayor25: 1,
     pagas: 14, 
-    discapacidad: 0, // 0% 33% 65%
+    discapacidad: 33, // 0% 33% 65%
 }; 
+
+// obtiene diferencia entre salario bruto y base de cotización
+function getRendNetoAnual(empleado){
+    return empleado.bruto - empleado.baseCotizacion
+}
 
 // Obtiene minoración por discapacidad
 function getDisabilityReduction(empleado){
@@ -26,23 +42,22 @@ function getDisabilityReduction(empleado){
     return minoracionDiscapacidad;
 }
 
-// obtiene diferencia entre salario bruto y base de cotización
-function getRendNetoAnual(empleado){
-    return empleado.bruto - empleado.baseCotizacion
-}
-
 // Obtiene base imponible general
 function getGeneralTaxableIncome(empleado){
-    
+
+    // Por tener mas de dos descendientes con derecho a minimo --> 600€
+    let numeroHijosDescuento;
+    numeroHijosDescuento = empleado.hijos - empleado.numeroHijosMayor25
+
+    deduccionHijosDerechoMinimo = numeroHijosDescuento > 2 ? 600 : 0
+
     return getRendNetoAnual(empleado)
             - empleado.minGastosDificilJustificar
             - getDisabilityReduction(empleado)
+            - deduccionHijosDerechoMinimo
 }
 
-
-// TODO construir esta funcion para reciclararla en la parte de totaldescendiente
 function getIRPF(cantidad){
-    //const cantidad = getGeneralTaxableIncome(empleado);
     
     let irpf;
     
@@ -75,7 +90,7 @@ function getIRPF(cantidad){
                 + ( 60000 - 35200 ) * 0.37
                 + ( cantidad - 60000) * 0.45;
     }
-    if (cantidad > 30000){
+    if (cantidad > 300000){
         irpf =    ( 12450 * 0.19 )
                 + ( 20200 - 12450 ) * 0.24
                 + ( 35200 - 20200 ) * 0.30
@@ -88,11 +103,26 @@ function getIRPF(cantidad){
 }
 
 function getMinimoPersonalFamiliar(empleado){
-    // caracter general 5500 € tengas o no hijos
+    
+    // caracter general 5550 € tengas o no hijos
+    let totalDescendiente = 5550;
+    
     // si > 65 años --> +1150 €
+    if ( empleado.edad > 65 ) totalDescendiente = totalDescendiente + 1150;
 
-    // si empleado.numeroHijosMayor25
-    // numeroHijosDescuento = empleado.hijos - empleado.numeroHijosMayor25
+    // El mínimo por discapacidad del contribuyente es de 3.000 € anuales y de 
+    // 9.000 € anuales cuando se acredite un grado de discapacidad igual o superior al 65 %.
+    // Se ignora en este apartado las discapacidades de los hijos ya que el minimo por
+    // discapacidad es la suma del mínimo por discapacidad del contribuyente y del mínimo 
+    // por discapacidad de ascendientes y descendientes.
+    if ( empleado.discapacidad === 0 ) totalDescendiente = totalDescendiente + 0;
+    if ( empleado.discapacidad === 33 ) totalDescendiente = totalDescendiente + 3000;
+    if ( empleado.discapacidad === 65 ) totalDescendiente = totalDescendiente + 9000;
+
+    // si tiene hijos mayor a 25 años se resta al numero de hijos
+    // ya que este deja de contarse como niño
+    let numeroHijosDescuento;
+    numeroHijosDescuento = empleado.hijos - empleado.numeroHijosMayor25
 
     // Primer hijo: 2.400 euros
     // Segundo hijo: 2.700 euros
@@ -100,41 +130,49 @@ function getMinimoPersonalFamiliar(empleado){
     // Cuarto hijo y posteriores: 4.500 euros.
     let minoracionHijos;
 
-    if ( numeroHijosDescuento === 1 ) minoracionHijos = 2400;
-    if ( numeroHijosDescuento === 2 ) minoracionHijos = 2400 + 2700;
-    if ( numeroHijosDescuento === 3 ) minoracionHijos = 2400 + 2700 + 4000;
-    if ( numeroHijosDescuento >= 4 ) minoracionHijos = 2400 + 2700 + 4000 + 4500;
+    if ( numeroHijosDescuento === 1 ) minoracionHijos = totalDescendiente + 2400;
+    if ( numeroHijosDescuento === 2 ) minoracionHijos = totalDescendiente + 2400 + 2700;
+    if ( numeroHijosDescuento === 3 ) minoracionHijos = totalDescendiente + 2400 + 2700 + 4000;
+    if ( numeroHijosDescuento >= 4 ) minoracionHijos = totalDescendiente + 2400 + 2700 + 4000 + 4500;
 
-    // por cada hijo menor de 3 años 2800 €
+    // por cada hijo menor de 3 años se recibe 2800 €
+    totalDescendiente = minoracionHijos + ( 2800 * empleado.numeroHijosMenorTresAnyos )
+
+    // # Se supone que los hijos no se comparte con el cónyugue. Simplemente habria que divir 
+    // # por dos el numero de hijos, lo que complicaría mucho más el cálculo.
 
     return totalDescendiente;
 }
 
+function getCuotaRetencion(empleado){
+    // Obtiene el IRPF por tramos de la base imponible general 
+    const cuota1 = getIRPF(getGeneralTaxableIncome(empleado));
 
-const cantidad = getGeneralTaxableIncome(empleado);
+    // Obtiene el IRPF por tramos de la cuota correspondiente al minimo personal y familiar
+    const cuota2 = getIRPF(getMinimoPersonalFamiliar(empleado));
+    
+    const cuotaRetencion = cuota1 - cuota2;
 
-cuota1 = getIRPF(cantidad);
+    return cuotaRetencion;
+}
 
-console.log(cuota1);
-
-cuota2 = getIRPF(getMinimoPersonalFamiliar(empleado));
-
-
-
-// cuotaTotal = cuota1 - cuota2
 // deberia elegir entre la menor cantidad entre cuota toal o calculo limite
 // ademas si el salario bruto es menorque 22000€ habra que tener en cuenta
 // las unidades familiares monoparentales, contribuyente con conyuge a cargo y demas
 // por lo que se ha ignorado esta parte para simplificar los calculos
 
-//  (cuotaTotal / empleado.bruto) * 100 = tipoRetencion.toFixed(2) (redondear por defecto)
+// Calcula tipo de retencion calculando TRUNCANDO dos decimales
+tipoRetencion = Math.floor( ( ( getCuotaRetencion(empleado) / empleado.bruto ) * 100) * 100 ) / 100;
 
-// cuotaTotalRecalculada = empleado.bruto * tipoRetencion/100
+// Recalcula la cuota total de retencion
+cuotaTotalRecalculada = ( empleado.bruto * tipoRetencion / 100 ).toFixed(2);
 
-// ( salarioBruto - cuotaTotalRecalculada ) / 14 --> Sueldo neto mensual
+// Calculamos el sueldo neto mensual tal y como lo pide la practica
+sueldoNetoMensual = ( empleado.bruto - cuotaTotalRecalculada ) / empleado.pagas;
 
+console.log("BASE PARA CALCULAR EL TIPO DE RETENCION: ", getGeneralTaxableIncome(empleado) + "€" );
+console.log("MINIMO PERSONAL Y FAMILIAR PARA TIPO RETENCION: ", getMinimoPersonalFamiliar(empleado) + "€" );
+console.log("TIPO DE RETENCION APLICABLE: ", tipoRetencion + "%" );
+console.log("IMPORTE ANUAL DE LAS RETENCIONES E INGRESOS A CUENTA: ", cuotaTotalRecalculada + "€" );
 
-// Hacer captura de pantalla con 3 ejemplos usando la aplicacion de hacienda
-
-
-// https://www.youtube.com/watch?v=j2oFYzK354I para comprobar que nos da
+console.log("Sueldo Neto Mensual Trabajador: ", sueldoNetoMensual.toFixed(2) + "€" );
