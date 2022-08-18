@@ -1,19 +1,21 @@
 console.log("# 2. Calcular sueldo según normativa actual")
 
-// Al definir los hijos del empleado se podrían crean tantos objetos como hijos tenga
-// construyendolo como por ejemplo: 
+// Al definir los hijos del empleado, se podrían crean tantos objetos como hijos tenga este.
+// Construyéndolo como: 
 // {anyoNacimiento: 2018, computadoEntero: true, discapacidad: 0, movilidadReducida:false}
 // Complicaria mucho las cosas y la verdad que para casos "ideales" (a la hora de escribir el codigo)
-// facilita mucho las cosas.
+// facilita mucho las cosas y además funciona 
 
-// Para el calculo, se han ignorado muchos gastos deducibles. Los mas comunes
-// se han tenido en cuenta.
+// Para el cálculo, se han ignorado muchos gastos deducibles. 
+// Sin embargo, los mas comunes se han tenido en cuenta.
 
 // Adjunto, en la carpeta de files se encuentra:
-// - el PDF de hacienda de las retenciones2022
+// # el PDF de hacienda de las retenciones2022
 //  -- files/retenciones2022.pdf
-// - dos ejemplos usando el programa de hacienda para retencion de IRPF 2022
+// # dos ejemplos usando el programa de hacienda para retencion de IRPF 2022
 //  -- ver files/ejemplo1.pdf y files/ejemplo2.pdf
+
+// definimos el objeto de empleado
 const empleado = {
     edad: 66,
     bruto: 75000, 
@@ -64,25 +66,21 @@ function getIRPF(cantidad){
     if (cantidad <= 12450){
         irpf = cantidad * 0.19;
     }
-
     if (cantidad > 12450 && cantidad <= 20200){
         irpf =    ( 12450 * 0.19 )
                 + ( cantidad - 12450 ) * 0.24;
     }
-
     if (cantidad > 20200 && cantidad <= 35200){
         irpf =    ( 12450 * 0.19 )
                 + ( 20200 - 12450 ) * 0.24
                 + ( cantidad - 20200 ) * 0.30;
     }
-    
     if (cantidad > 35200 && cantidad <= 60000){
         irpf =    ( 12450 * 0.19 )
                 + ( 20200 - 12450 ) * 0.24
                 + ( 35200 - 20200 ) * 0.30
                 + ( cantidad - 35200) * 0.37;
     }
-
     if (cantidad > 60000 && cantidad <= 300000){
         irpf =    ( 12450 * 0.19 )
                 + ( 20200 - 12450 ) * 0.24
@@ -155,11 +153,11 @@ function getCuotaRetencion(empleado){
 
     return cuotaRetencion;
 }
-
-// deberia elegir entre la menor cantidad entre cuota toal o calculo limite
-// ademas si el salario bruto es menorque 22000€ habra que tener en cuenta
-// las unidades familiares monoparentales, contribuyente con conyuge a cargo y demas
-// por lo que se ha ignorado esta parte para simplificar los calculos
+// NOTA:
+// deberia elegir entre la menor cantidad entre cuota total o cálculo límite
+// además si el salario bruto es menor que 22000€ habrá que tener en cuenta
+// las unidades familiares monoparentales, contribuyente con conyuge a cargo y demás
+// por lo que se ha ignorado esta parte para simplificar los cálculos 
 
 // Calcula tipo de retencion calculando TRUNCANDO dos decimales
 tipoRetencion = Math.floor( ( ( getCuotaRetencion(empleado) / empleado.bruto ) * 100) * 100 ) / 100;
@@ -167,7 +165,7 @@ tipoRetencion = Math.floor( ( ( getCuotaRetencion(empleado) / empleado.bruto ) *
 // Recalcula la cuota total de retencion
 cuotaTotalRecalculada = ( empleado.bruto * tipoRetencion / 100 ).toFixed(2);
 
-// Calculamos el sueldo neto mensual tal y como lo pide la practica
+// Calculamos el sueldo neto mensual tal y como lo pide la práctica
 sueldoNetoMensual = ( empleado.bruto - cuotaTotalRecalculada ) / empleado.pagas;
 
 console.log("BASE PARA CALCULAR EL TIPO DE RETENCION: ", getGeneralTaxableIncome(empleado) + "€" );
