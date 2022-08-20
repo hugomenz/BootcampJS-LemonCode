@@ -62,8 +62,15 @@ function buttonDivision () {
 
 // When a input field is empty the border color changes to red
 function changeStyleInputField(){
-    if ( getNumber1() == "" ) document.getElementById("input-number1").style.border = "2px solid red";
-    if ( getNumber2() == "" ) document.getElementById("input-number2").style.border = "2px solid red";
+    if ( getNumber1() == "" ) {
+        document.getElementById("input-number1").style.border = "2px solid red";
+        document.getElementById("calculator-screen").innerHTML = "ERROR";
+    }
+
+    if ( getNumber2() == "" )  {
+        document.getElementById("input-number2").style.border = "2px solid red";
+        document.getElementById("calculator-screen").innerHTML = "ERROR";
+    }
 }
 
 // When the input field is NOT empty change the border color to original again
