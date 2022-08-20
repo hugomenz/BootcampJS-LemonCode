@@ -3,12 +3,12 @@ header{
 }
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 .calculator {
     border:1px solid rgba(0, 0, 0, 0.795);
-    width: 50%;
-    height: 200px;
+    width: 60%;
+    /*height: 200px;*/
     padding: 16px 16px;
     border-radius: 5px;
     box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
@@ -19,15 +19,27 @@ body {
     display:flex;
 }
 
+.input-container{
+    display:flex;
+    /* border:1px solid rgba(0, 0, 0, 0.795); */
+}
 
 input {
     margin-top: 16px;
     background: #f3f2ef;
     padding:8px;
     box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+    width: 0%;
+    min-width: 100%;
   }
   input:hover {
     background: #ffffff;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 #input-number1,
@@ -36,6 +48,7 @@ input {
     box-sizing: border-box;
     border:1px solid rgba(0, 0, 0, 0.795);
     border-radius: 5px;
+    
 }
 
 #input-number1 {
@@ -47,25 +60,26 @@ input {
     margin-left: 16px;
 }
 
+.button-container {
+    margin-left: 16px;
+    /* border:1px solid rgba(0, 0, 0, 0.795); */
+}
+
 button {
     margin-top: 16px;
+    margin-left: 12px;
     font-size: large;
     box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+    color:rgb(58, 55, 55);
     padding: 4px;
     width: 40px;
     height: 40px;
     cursor: pointer;
 }
-
 button:active {
     position: relative;
-    top: 1px;
+    top: 2px;
 }
-
-.button-container {
-    margin-left: 16px;
-}
-
 
 #button-addition {
     border:1px solid rgba(0, 0, 0, 0.795);
@@ -74,6 +88,8 @@ button:active {
 }
 #button-addition:hover {
     background: #ff5f6f;
+    color:black;
+    border:2px solid rgba(255, 23, 23, 0.795);
 }
 
 #button-subtraction {
@@ -83,6 +99,8 @@ button:active {
 }
 #button-subtraction:hover {
     background: #fdfd59;
+    color:black;
+    border:2px solid #dada0e;
 }
 
 #button-multiplication {
@@ -92,6 +110,8 @@ button:active {
 }
 #button-multiplication:hover {
     background: #56ff7b;
+    color:black;
+    border:2px solid #00dd30;
 }
 
 #button-division {
@@ -101,11 +121,13 @@ button:active {
 }
 #button-division:hover {
     background: #5fbaff;
+    color:black;
+    border:2px solid #3caaff;
 }
 
 .screen-container {
     height: 60px;
-    width: 50%;
+    width: 52%;
     box-sizing: border-box;
     padding-left: 10px;
     margin-top: 20px;
