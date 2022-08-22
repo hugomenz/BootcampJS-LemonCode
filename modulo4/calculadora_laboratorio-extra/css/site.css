@@ -1,0 +1,132 @@
+  
+body {
+    padding: 0;
+    background: linear-gradient(#c1bbdd, #ffffba);
+    margin-top: 64px;
+}
+  
+input{
+    padding: 32px;
+    text-align: right;
+    border-radius: 5px;
+    font-size: 3vw;
+    font-weight: normal;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+/*deletes spin button*/
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.calculator-grid {
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    grid-template-columns: repeat(4, 100px);
+    grid-template-rows: minmax(120px, auto) repeat(5, 100px);
+}
+
+.calculator-grid > button {
+    font-size: 2rem;
+    border: 1px solid white;
+    outline: none;
+}
+
+.four-spaces {
+    grid-column: span 4;
+}
+
+.output {
+    grid-column: 1 / -1;
+    background-color: rgba(0, 0, 0, .75);
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    flex-direction: column;
+    padding: 10px;
+    word-wrap: break-word;
+    word-break: break-all;
+    border-radius: 5px;
+}
+
+.output .result-number{
+    color: white;
+    font-size: 3rem;
+    padding-top: 0px;
+    padding-right: 32px;
+}
+
+.output .operation{
+    color: white;
+    font-size: 1rem;
+    padding-bottom: 1px;
+    padding-right: 32px;
+}
+
+button {
+    cursor: grab;
+}
+
+button:active {
+    position: relative;
+    top: 2px;
+    cursor: grabbing;
+}
+
+#button-addition {
+    border:1px solid rgba(0, 0, 0, 0.795);
+    border-radius: 5px;
+    background: #ffb3ba;
+}
+#button-addition:hover {
+    background: #ff5f6f;
+    color:black;
+    border:2px solid rgba(255, 23, 23, 0.795);
+}
+
+#button-subtraction {
+    border:1px solid rgba(0, 0, 0, 0.795);
+    border-radius: 5px;
+    background: #ffffba;
+}
+#button-subtraction:hover {
+    background: #fdfd59;
+    color:black;
+    border:2px solid #dada0e;
+}
+
+#button-multiplication {
+    border:1px solid rgba(0, 0, 0, 0.795);
+    border-radius: 5px;
+    background: #baffc9;
+}
+#button-multiplication:hover {
+    background: #56ff7b;
+    color:black;
+    border:2px solid #00dd30;
+}
+
+#button-division {
+    border:1px solid rgba(0, 0, 0, 0.795);
+    border-radius: 5px;
+    background: #bae1ff;
+}
+#button-division:hover {
+    background: #5fbaff;
+    color:black;
+    border:2px solid #3caaff;
+}
+
+#button-result {
+    border:1px solid rgba(0, 0, 0, 0.795);
+    border-radius: 5px;
+    background: #c1bbdd;
+}
+#button-result:hover {
+    background: #8d7cda;
+    color:black;
+    border:2px solid #504191;
+}
