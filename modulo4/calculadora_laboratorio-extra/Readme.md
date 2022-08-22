@@ -2,7 +2,7 @@
 
 # Calculadora Secuencial
 
-Se le han añadido algunas funciones nuevas a la calculadora a parte de las requeridas por el ejercicio.
+Se le han añadido algunas **funciones nuevas** a la calculadora a parte de las requeridas por el ejercicio.
 * La calculadora se inicializa por defecto en cero.
 * Si el usuario introduce numero y selecciona el boton "igual", se devuelve el mismo numero
 * Al escribir por primera vez en la calculadora, se borra el cero automaticamente y se escribe el numero que queremos.
