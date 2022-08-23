@@ -2,4 +2,4 @@
 
 ## Reservas en un Hotel
 
-#### Formulario de reserva de un hotel CON boton
+#### Formulario de reserva de un hotel SIN boton
