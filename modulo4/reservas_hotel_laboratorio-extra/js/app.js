@@ -22,7 +22,6 @@ function getBookingPrice( typeRoom, sizeRoom, extraSpaRate, selectedNumberNight,
 }
 
 function getResult(){
-    // get number of nights from both inputs
     var selectedNumberNight = getNumberNight();
     var parkingNumberNight = getParkingNumberNight();
     var typeRoom = getTypeRoom();
