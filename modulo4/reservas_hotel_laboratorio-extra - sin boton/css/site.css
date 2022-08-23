@@ -1,0 +1,160 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+body {
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    background: linear-gradient(135deg, #E9E0AC, #88CED2 );
+}
+
+.container {
+    max-width: 700px;
+    width: 100%;
+    background: #fff;
+    padding: 25px 30px;
+    border-radius: 5px;
+}
+
+.container .title {
+    font-size: 25px;
+    font-weight: 500;
+    position: relative;
+}
+
+.container .title::before{
+    content: '';
+    position:absolute;
+    left:0;
+    bottom: 0;
+    height: 3px;
+    width: 30px;
+    background: #F06C64;
+}
+
+.container .room-properties {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 20px 0 12px 0;
+}
+
+.option{
+    width: calc(100% /2 - 20px);
+}
+
+.option .option-select {
+    height: 45px;
+    width: 100%;
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding-left: 15px;
+    font-size: 16px;
+    
+}
+.container .extra{
+    display: flex;
+    align-items: center;
+    height: 45px;
+    margin: 16px 0 16px 0;
+}
+
+.checkbox{
+    display: flex;
+    width: 200px;
+}
+
+.checkbox > input{
+    height: 32px;
+    width: 32px;
+}
+
+.checkbox > label{
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    padding-left: 8px;
+}
+
+/*deletes spin button*/
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.container .input-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.container .input-container .input-box {
+    margin-bottom: 15px;
+    width: calc(100% /2 - 20px);
+}
+
+.input-box input {
+    height: 45px;
+    width: 100%;
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding-left: 15px;
+    font-size: 18px;
+}
+
+.input-container .input-box .details{
+    display: block;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+/* .input-container .input-box input:focus,
+.input-container .input-box input:valid{
+    /* para cuando metes texto ... mirar como funciona*/
+
+.container .button {
+    height: 60px;
+    margin: 16px 0;
+    width: 100%;
+    background: linear-gradient(135deg, #88CED2, #F06C64);
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+button:active {
+    position: relative;
+    top: 2px;
+}
+
+.container .button span {
+    height: 100%;
+    font-size: 24px;
+    color: #fff;
+}
+
+.container .price{
+    margin-top: 8px;
+    padding: 8px 0 8px 0;
+    height: 60px;
+    display: flex;
+    align-items: center;
+}
+
+.price .price-box{
+    font-size: 24px;  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+

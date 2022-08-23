@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es" translate="no">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reserva Hotel</title>
+    <link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+    <div class="container">
+        <div class="title">Hotel Registration Form</div>
+        <div class="room-properties">
+            <div class="option">
+                <select class="option-select" name="option-select" id="room-type">
+                    <option value="option-1">standard</option>
+                    <option value="option-2">junior suite</option>
+                    <option value="option-3">suite</option>
+                </select>
+            </div>
+            <div class="option">
+                <select class="option-select" name="option-select" id="room-size">
+                    <option value="option-1">Individual</option>
+                    <option value="option-2"> Doble</option>
+                    <option value="option-3">Triple</option>
+                </select>
+            </div>
+        </div>
+        <div class="extra">
+            <div class="checkbox">
+                <input type="checkbox" id="option-spa">
+                <label for="option-spa">Option: Spa</label>
+            </div>
+        </div>
+        <div class="input-container">
+            <div class="input-box">
+                <span class="details">Night Numbers</span>
+                <input type="number" id="night-input" value="0">
+            </div>
+            <div class="input-box">
+                <span class="details">Parking Night Numbers</span>
+                <input type="number" id="parking-input" value="0">
+            </div>
+        </div>
+        
+        <hr>
+        <div class="price">
+                       
+            <div class="price-box">
+                <span class="price-result" id="result">0.00€</span>
+            </div>
+            
+        </div>
+
+    </div>
+    <script src="js/app.js"></script>
+</body>
+</html>
