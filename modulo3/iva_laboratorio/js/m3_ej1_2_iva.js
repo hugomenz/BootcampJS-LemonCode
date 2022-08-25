@@ -1,7 +1,7 @@
 console.log("# 2. Cálculo IVA usando funciones")
 
 // poduct declarado en el fichero m3_ej1_1_iva.js
-// const product = { count: 3, price: 12.55, type: "ropa" };
+const product = { count: 3, price: 12.55, type: "ropa" };
 
 function getTotal (product){
     // condicion cantidades negativas

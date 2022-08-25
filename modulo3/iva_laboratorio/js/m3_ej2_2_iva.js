@@ -1,10 +1,10 @@
 console.log("# 3. Ejercicio 2-2 Avanzado. Cálculo IVA usando getTotalVat y printProductPrice")
 
 // poduct declarado en el fichero m3_ej1_1_iva.js
-// const product = { count: 3, price: 12.55, type: "ropa" };
+const product = { count: 3, price: 12.55, type: "ropa" };
 
 function getTotal (product){
-    totalAmount =  count * product.price;
+    totalAmount =  product.count * product.price;
 
     return totalAmount;
 }
