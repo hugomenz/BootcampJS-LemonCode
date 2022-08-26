@@ -4,7 +4,7 @@
 
 #### NOTAS: 
 * Listar todos los productos.
-** Al mostrar la estructura del carrito de compra usando múltiples console.log desde dentro de una funcion
+   * Al mostrar la estructura del carrito de compra usando múltiples console.log desde dentro de una funcion
 *printProduct*, como esta no devuelve nada usando el return, el for loop devuelve undefined al final de cada iteración, se puede quitar empleando un `return '';`
 
 * Eliminar el producto con id 54657 del carrito de la compra.
@@ -27,7 +27,9 @@
 * El subtotal se modifica automáticamente.
 * Muestra si se deben pagar tasas adicionales por envío al no ser todos los productos premium.
 > All products are premium!  Free delivery! ✔️
+
 > With delivery fees (All products are not Premium) ❌
 * Muestra si se ha aplicado un descuento por ser el subtotal superior a 150€.
 > No discount available (subtotal < 150€) ❌
+
 > Discount of 5% ✔️
