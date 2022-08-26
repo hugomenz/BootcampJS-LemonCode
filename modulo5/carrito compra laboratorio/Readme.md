@@ -14,10 +14,10 @@
 
 >OPCIONAL
 * Si todos los productos son prime mostrar un mensaje "Pedido sin gastos de envío", si no "Este pedido tiene gastos de envío".
-** Ya que todo el contenido de la página está en ingles, he cambiado el mensaje 
+    * Ya que todo el contenido de la página está en ingles, he cambiado el mensaje 
 * Mostrar el carrito en un listado de html básico.
 * Aplicar un descuento del 5% si la compra es mayor de 100 €.
-** Se ha usado como precio límite 150€ ya que seleccionando unicamente 1 producto de cada, la suma es de 101,60€.
+    * Se ha usado como precio límite 150€ ya que seleccionando unicamente 1 producto de cada, la suma es de 101,60€.
 
 #### Funciones adicionales.
 * Se ha añadido la posibilidad de hacer click sobre **"+"** o **"-"** pudiendo cambiar el número total de articulos. La cuenta llega hasta 1, ya que si hay productos en el carro de la compra, no podría ser cero. En este caso, se deberían eliminar del carro mediante un boton de eliminar o similar.
