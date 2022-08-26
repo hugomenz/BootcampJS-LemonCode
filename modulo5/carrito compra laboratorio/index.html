@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-ES">
+<html lang="en-ES" translate="no">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,8 +8,112 @@
     <link rel="stylesheet" href="css/site.css">
 </head>
 <body>
-    
 
+    <div class="shopping-container">
+        <div class="shopping-header">
+            <h2 class="shopping-header">SHOPPING CART</h2>
+        </div>
+        <div class="shopping-body" id="shopping-cart">
+            <div class="shopping-item">
+                <div class="selection">
+                    <input id="item1" type="checkbox"> 
+                </div>
+                <img class="responsive" src="https://ahozat6rn.cloudimg.io/v7/_letzshop_production_img_/spree/products/2295535/original/item531016310000.jpg?q=75&width=750&height=750&func=bound&org_if_sml=1&force_format=webp%2Cjpeg" alt="tintaColor">
+                <div class="item-entry">
+                    <span class="item-name" id="item-1"></span>
+                    <span class="item-description" id="price-unit-1"></span>
+                    <span class="item-description" id="premium-1">Premium item</span>
+                </div>
+                <div>               
+                    <button class="quantity" id="button-add">+</button>
+                    <span class="quantity-amount" id="amount-1"></span>
+                    <button class="quantity" id="button-minus">-</button>
+                </div>
+                <div class="value">
+                    <span id="price-item-1"></span>
+                </div>
+                
+            </div>
+            <div class="shopping-item">
+                <div class="selection">
+                    <input id="item2" type="checkbox"> 
+                </div>
+                <img class="responsive" src="data:image/jpeg;base64,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" alt="ticketPrinter">
+                <div class="item-entry">
+                    <span class="item-name" id="item-2"></span>
+                    <span class="item-description" id="price-unit-2"></span>
+                    <span class="item-description" id="premium-2">Premium item</span>
+                </div>
+                <div>               
+                    <button class="quantity" id="button-add">+</button>
+                    <span class="quantity-amount" id="amount-2"></span>
+                    <button class="quantity" id="button-minus">-</button>
+                </div>
+                <div class="value">
+                    <span id="price-item-2"></span>
+                </div>
+
+            </div>
+            <div class="shopping-item">
+                <div class="selection">
+                    <input id="item3" type="checkbox"> 
+                </div>
+                <img class="responsive" src="https://rollosdepapel.es/330-home_default/rollo-de-papel-termico-80x80-pack-8-uds.jpg" alt="paperRoll">
+                <div class="item-entry">
+                    <span class="item-name" id="item-3"></span>
+                    <span class="item-description" id="price-unit-3"></span>
+                    <span class="item-description" id="premium-3">Premium item</span>
+                </div>
+                <div >               
+                    <button class="quantity" id="button-add">+</button>
+                    <span class="quantity-amount" id="amount-3">1</span>
+                    <button class="quantity" id="button-minus">-</button>
+                </div>
+                <div class="value">
+                    <span id="price-item-3"></span>
+                </div>
+
+            </div>
+            <div class="shopping-item">
+                <div class="selection">
+                    <input id="item4" type="checkbox"> 
+                </div>
+                <img class="responsive" src="https://outletdelocio.es/13882-large_default/caja-2500-folios-din-a4-80gr.jpg" alt="OfficePaper">
+                <div class="item-entry">
+                    <span class="item-name" id="item-4"></span>
+                    <span class="item-description" id="price-unit-4"></span>
+                    <span class="item-description" id="premium-4">Premium item</span>
+                </div>
+                <div>               
+                    <button class="quantity" id="button-add">+</button>
+                    <span class="quantity-amount" id="amount-4">1</span>
+                    <button class="quantity" id="button-minus">-</button>
+                </div>
+                <div class="value">
+                    <span id="price-item-4"></span>
+                </div>
+
+            </div>
+        </div>
+        <div class="shopping-footer"> 
+            <div class="totals-box">
+                <div class="subtotal">
+                    <span>Subtotal</span>
+                    <span id="subtotal"></span>
+                </div>
+                <div class="fees">
+                    <span id="delivery-fees">mmmmm</span>
+                </div>
+                <div class="discount">
+                    <span id="order-discount">mmm</span>
+                </div>
+                <div class="total">
+                    <span>Total</span>
+                    <span id="total">262.10 E</span>
+                </div>
+            </div>
+        </div>
+    </div>
 
 <script src="js/app.js"></script>
 </body>
