@@ -10,7 +10,7 @@ var cleanParkingInputField = () => document.getElementById( 'parking-input' ).va
 var handlingWritingNightInput = () => { if ( getNumberNight() == 0 ) cleanNightInputField() };
 var handlingWritingParkingInput = () => { if ( getParkingNumberNight() == 0 ) cleanParkingInputField() };
 
-function getBookingPrice( typeRoom, sizeRoom, extraSpaRate, selectedNumberNight, parkingNumberNight ){
+/* function getBookingPrice( typeRoom, sizeRoom, extraSpaRate, selectedNumberNight, parkingNumberNight ){
     // spa selected = true
     var selectedOptionRate =  nightRate [typeRoom] + extraSpaRate;
     var typeDiscount = 1 + sizeRoomDiscount [sizeRoom];
@@ -32,8 +32,32 @@ function getResult(){
     finalResult = getBookingPrice( typeRoom, sizeRoom, extraSpaRate, selectedNumberNight, parkingNumberNight );
     
     writePriceField( finalResult.toFixed(2) + "€" );
+} */
+
+//// DESPUES DE LA REVISION
+
+
+function getResult(){
+    var selectedNumberNight = getNumberNight();
+    var parkingNumberNight = getParkingNumberNight();
+    var typeRoom = getTypeRoom();
+    var sizeRoom = getSizeRoom();
+    var selectedSpa = getSpaStatus();
+    var extraSpaRate = (selectedSpa == 1)  ?  20 : 0;
+
+    var selectedOptionRate =  nightRate [typeRoom] + extraSpaRate;
+    var typeDiscount = 1 + sizeRoomDiscount [sizeRoom];
+    var parkingPriceBooking = parkingNumberNight * parkingNightRate;
+    
+    priceBooking = ( typeDiscount * selectedOptionRate * selectedNumberNight ) + parkingPriceBooking;
+
+  /*   finalResult = getBookingPrice( typeRoom, sizeRoom, extraSpaRate, selectedNumberNight, parkingNumberNight ); */
+    writePriceField( priceBooking.toFixed(2) + "€" );
 }
 
+
+
+///////////////////////////
 // variables
 var nightRate = {
     standard:100,
