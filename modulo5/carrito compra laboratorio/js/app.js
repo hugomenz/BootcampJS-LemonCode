@@ -103,14 +103,15 @@ function getShoppingCartDetails(cart){
 
 // Adds or subtracts products from the HTML cart and update the cart
 function handlingCounterButton(event){
-    countButtonClicked = event.path[1].childNodes[3]; // Identifies clicked button HTML element
-    buttonType = event.target.id; // identifies clicked button name
-
+    console.log( "-".repeat(15) + "button clicked" + "-".repeat(18));
+    countButtonClicked = event.path[1].childNodes[3]; // Identifies clicked button using the amount id
+    buttonType = event.target.id; // identifies clicked button name --> button-add or button-minus
+    
     oldValue = +document.getElementById( countButtonClicked.id ).textContent;
     
     if ( buttonType === "button-add" ){
         document.getElementById( countButtonClicked.id ).innerHTML = oldValue + 1;
-    }else if( oldValue != 1 ){
+    }else if( oldValue != 1 ){ // min number of articles in the shopping cart
         document.getElementById( countButtonClicked.id ).innerHTML = oldValue - 1;
         oldValue = oldValue;
     }
@@ -118,9 +119,9 @@ function handlingCounterButton(event){
     var idIndexProduct = countButtonClicked.id.split("-")[countButtonClicked.id.split("-").length - 1];
     shoppingCart[idIndexProduct - 1].count = +document.getElementById( countButtonClicked.id ).textContent;
     
-    console.log(idIndexProduct);
     console.log("Shopping cart updated!", shoppingCart)
-    
+    console.log("-".repeat(48));
+    // updates shopping cart object with the new values
     getShoppingCartDetails(shoppingCart);
 }
 
@@ -183,10 +184,3 @@ checkTotalValueDiscount(shoppingCart);
 
 // modifies the html with the shopping cart values, description, count and price
 getShoppingCartDetails(shoppingCart);
-
-// If a button of add or subtract is clicked, it updates the shopping cart and the HTML page
-var clickedButton = document.querySelectorAll('button'); // gets all button HTML elements
-for (button of clickedButton) {
-    // button: html element with id button-add or button-minus
-    button.addEventListener('click', handlingCounterButton);
-}
