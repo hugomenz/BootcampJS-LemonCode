@@ -1,69 +1,4 @@
-// Constantes.
-const REGULAR_TYPE = 21;
-const LOWER_TYPE = 4;
-const EXEMPT_TYPE = 0;
-
-// Entrada.
-var products = [
-    {
-      description: "Goma de borrar",
-      price: 0.25,
-      tax: LOWER_TYPE,
-      stock: 2,
-      units: 0,
-    },
-    {
-      description: "Lápiz H2",
-      price: 0.4,
-      tax: LOWER_TYPE,
-      stock: 5,
-      units: 0,
-    },
-    {
-      description: "Cinta rotular",
-      price: 9.3,
-      tax: REGULAR_TYPE,
-      stock: 2,
-      units: 0,
-    },
-    {
-      description: "Papelera plástico",
-      price: 2.75,
-      tax: REGULAR_TYPE,
-      stock: 5,
-      units: 0,
-    },
-    {
-      description: "Escuadra",
-      price: 8.4,
-      tax: REGULAR_TYPE,
-      stock: 3,
-      units: 0,
-    },
-    {
-      description: "Pizarra blanca",
-      price: 5.95,
-      tax: REGULAR_TYPE,
-      stock: 2,
-      units: 0,
-    },
-    {
-      description: "Afilador",
-      price: 1.2,
-      tax: LOWER_TYPE,
-      stock: 10,
-      units: 0,
-    },
-    {
-      description: "Libro ABC",
-      price: 19,
-      tax: EXEMPT_TYPE,
-      stock: 2,
-      units: 0,
-    },
-  ];
-
-
+// create the input fields
 var createQuantity = (product) => {
   quantity = document.createElement("input");
   quantity.setAttribute("type", "number");
@@ -72,10 +7,13 @@ var createQuantity = (product) => {
   quantity.setAttribute("min", "0");
   quantity.setAttribute("max", product.stock); 
   quantity.setAttribute("class", "quantity-amount");
+  product.units = 0;
+  quantity.value = product.units;
 
   return quantity;
 }
 
+// create HTML shopping cart page
 var showProducts = productList => {
   /*  <div class="shopping-item"> */
   const shoppingCartContainer = document.getElementById("shopping-cart")
@@ -146,12 +84,14 @@ var showProducts = productList => {
 }
 
 // called from HTML onclick of button Pay now
-function createInvoiceHTML (){
+// create footer HTML
+var createInvoiceHTML = () =>{
   var container = document.getElementById("container");
 
   var shoppingFooter = document.createElement("div");
   shoppingFooter.setAttribute("class", "shopping-footer");
-
+  shoppingFooter.setAttribute("id", "shopping-footer");
+  
   var totalsBox = document.createElement("div");
   totalsBox.setAttribute("class", "totals-box");
 
@@ -192,9 +132,8 @@ function createInvoiceHTML (){
   total.appendChild(totalValue);
 }
 
-function getVAT(productVAT){
-
-  //IVA. Podrá ser normal (21%), reducido (4%) o exento.
+// return a value deppending on the tax element
+var getVAT = productVAT => {
   switch(productVAT) {
     case "REGULAR_TYPE":
       productVAT = 21;
@@ -206,45 +145,141 @@ function getVAT(productVAT){
       productVAT = 0;
       break;
   }
-  // console.log(productVAT)
   return productVAT;
 }
-// create unit for each product, reading from the input value, calculate the 
-// total of each product and show it in the HTML
-function handlingCartChanges(product){
-  inputField.addEventListener("change", (event) =>{
+
+// get subtotal of the shopping cart
+function getSubtotalCartValue (productList){
+  var subtotalCartValue = 0; 
+  for (var product of productList) subtotalCartValue += (product.price * product.units);
+  return subtotalCartValue;
+}
+
+// handling shopping cart changes:
+// enable "Pay Now" button
+// create and change the product unit number
+// get total product price
+var handlingCartChanges = product =>{
+  inputField.addEventListener("change", (event) => {
     product.units = event.target.valueAsNumber;
     document.getElementById("total-price-" + product.description).innerHTML = (product.units * product.price).toFixed(2);
-    console.log(products)
+  
+    // condition to enabled/disabled "Pay Now" button 
+    if (document.getElementById("item-" + product.description).valueAsNumber != 0){
+      document.getElementById("button-result").disabled = false; // enabled
+      console.log("button enabled!");
+    } else if( getSubtotalCartValue(products) == 0){
+      document.getElementById("button-result").disabled = true; // disabled
+      console.log("button DISABLED");
+    }
   });
 }
 
-function handlingPayNowButton(productList){
-  createInvoiceHTML();
-
+var printFooterData = () => {
   var subtotal = 0;
   var iva = 0;
   var total = 0;
 
   for (var product of products){
-    subtotal += ( product.price * product.units );
     iva += ( product.price * product.units )  * getVAT(product.tax) / 100;
   }
-  
+
+  subtotal = getSubtotalCartValue(products);
   total = subtotal + iva;
 
   document.getElementById("subtotal").innerHTML = subtotal.toFixed(2) + "€";
   document.getElementById("iva").innerHTML = iva.toFixed(2) + "€";
   document.getElementById("total").innerHTML = total.toFixed(2) + "€";
 }
+
+// create the shooping cart footer if it doesn't exist
+// calculate and show in the HTML the subtotal, iva and total
+var handlingPayNowButton = productList => {
+    // without it, it creates multiple footers
+    if(!document.getElementById("shopping-footer")) {
+      createInvoiceHTML();
+      printFooterData();
+    } else{ // if the footer is created only print the calculations
+      printFooterData();
+    }
+}
+
+
+// Constants
+const REGULAR_TYPE = 21;
+const LOWER_TYPE = 4;
+const EXEMPT_TYPE = 0;
+
+// Input
+var products = [
+    {
+      description: "Goma de borrar",
+      price: 0.25,
+      tax: LOWER_TYPE,
+      stock: 2,
+      units: 0,
+    },
+    {
+      description: "Lápiz H2",
+      price: 0.4,
+      tax: LOWER_TYPE,
+      stock: 5,
+      units: 0,
+    },
+    {
+      description: "Cinta rotular",
+      price: 9.3,
+      tax: REGULAR_TYPE,
+      stock: 2,
+      units: 0,
+    },
+    {
+      description: "Papelera plástico",
+      price: 2.75,
+      tax: REGULAR_TYPE,
+      stock: 5,
+      units: 0,
+    },
+    {
+      description: "Escuadra",
+      price: 8.4,
+      tax: REGULAR_TYPE,
+      stock: 3,
+      units: 0,
+    },
+    {
+      description: "Pizarra blanca",
+      price: 5.95,
+      tax: REGULAR_TYPE,
+      stock: 2,
+      units: 0,
+    },
+    {
+      description: "Afilador",
+      price: 1.2,
+      tax: LOWER_TYPE,
+      stock: 10,
+      units: 0,
+    },
+    {
+      description: "Libro ABC",
+      price: 19,
+      tax: EXEMPT_TYPE,
+      stock: 2,
+      units: 0,
+    },
+  ];
+
 // start the website creating the shopping cart from an array of products
 showProducts(products);
 
+document.getElementById("button-result").disabled = true; // Disabled
+console.log("button DISABLED")
+
 // input listener
 for (var product of products){
+  var unitTotals;
   var idName = "item-" + product.description;
   var inputField = document.getElementById(idName);
   handlingCartChanges(product);
-
-
 }

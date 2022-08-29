@@ -112,11 +112,15 @@ body {
     outline: none;
     border-radius: 5px;
     border: 1px solid #ccc;
+    cursor: pointer;
 }
 
-button:active {
+button:enabled:active {
     position: relative;
     top: 2px;
+}
+.shopping-container .button:disabled{
+ background: grey;
 }
 
 .shopping-container .button span {
