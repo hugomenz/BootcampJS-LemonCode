@@ -87,7 +87,7 @@ var validateForm = (event) => {
     validateInput("fullName", isValidFullName);
     validateInput("birthday", isValidDate);
     validateInput("dni", isValidDNI);
-    validateInput("mobile", isValidMobile);
+    validateInput("mobile", isValidMobile)
 };
 
 // Events
