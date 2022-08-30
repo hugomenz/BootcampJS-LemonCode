@@ -162,7 +162,7 @@ function getSubtotalCartValue (productList){
 var handlingCartChanges = product =>{
   inputField.addEventListener("change", (event) => {
     product.units = event.target.valueAsNumber;
-    document.getElementById("total-price-" + product.description).innerHTML = (product.units * product.price).toFixed(2);
+    document.getElementById("total-price-" + product.description).innerHTML = (product.units * product.price).toFixed(2) + "€";
   
     // condition to enabled/disabled "Pay Now" button 
     if (document.getElementById("item-" + product.description).valueAsNumber != 0){
