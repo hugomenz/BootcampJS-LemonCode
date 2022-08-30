@@ -167,11 +167,18 @@ var handlingCartChanges = product =>{
     // condition to enabled/disabled "Pay Now" button 
     if (document.getElementById("item-" + product.description).valueAsNumber != 0){
       document.getElementById("button-result").disabled = false; // enabled
-      console.log("button enabled!");
-    } else if( getSubtotalCartValue(products) == 0){
+      
+      // if the subtotal is 0,  
+    } else if( (getSubtotalCartValue(products) == 0 ) ){
+      document.getElementById("total-price-" + product.description).innerHTML = "";
       document.getElementById("button-result").disabled = true; // disabled
-      document.getElementById("shopping-footer").remove(); // remove footer when no products are selected
-      console.log("button DISABLED");
+      
+      // remove footer when no products are selected or when product unit is back to zero
+      if (document.getElementById("shopping-footer"))document.getElementById("shopping-footer").remove(); 
+      
+    }else{
+      // remove 0.00E if the product unit is back to zero
+      document.getElementById("total-price-" + product.description).innerHTML = "";
     }
   });
 }
@@ -204,7 +211,6 @@ var handlingPayNowButton = productList => {
       printFooterData();
     }
 }
-
 
 // Constants
 const REGULAR_TYPE = 21;
