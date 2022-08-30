@@ -170,6 +170,7 @@ var handlingCartChanges = product =>{
       console.log("button enabled!");
     } else if( getSubtotalCartValue(products) == 0){
       document.getElementById("button-result").disabled = true; // disabled
+      document.getElementById("shopping-footer").remove(); // remove footer when no products are selected
       console.log("button DISABLED");
     }
   });
