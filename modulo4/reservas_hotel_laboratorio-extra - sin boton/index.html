@@ -12,14 +12,14 @@
         <div class="title">Hotel Registration Form</div>
         <div class="room-properties">
             <div class="option">
-                <select class="option-select" name="option-select" id="room-type">
+                <select class="option-select" name="option-select" id="room-type" onchange="getResult()">
                     <option value="option-1">standard</option>
                     <option value="option-2">junior suite</option>
                     <option value="option-3">suite</option>
                 </select>
             </div>
             <div class="option">
-                <select class="option-select" name="option-select" id="room-size">
+                <select class="option-select" name="option-select" id="room-size" onchange="getResult()">
                     <option value="option-1">Individual</option>
                     <option value="option-2"> Doble</option>
                     <option value="option-3">Triple</option>
@@ -27,17 +27,17 @@
             </div>
         </div>
         <div class="extra">
-            <div class="checkbox">
+            <div class="checkbox" onchange="getResult()">
                 <input type="checkbox" id="option-spa">
                 <label for="option-spa">Option: Spa</label>
             </div>
         </div>
         <div class="input-container">
-            <div class="input-box">
+            <div class="input-box" onchange="getResult()" onkeydown="firstWritingInputs(event)">
                 <span class="details">Night Numbers</span>
                 <input type="number" id="night-input" value="0">
             </div>
-            <div class="input-box">
+            <div class="input-box" onchange="getResult()" onkeydown="firstWritingInputs(event)">
                 <span class="details">Parking Night Numbers</span>
                 <input type="number" id="parking-input" value="0">
             </div>
@@ -45,7 +45,7 @@
         
         <hr>
         <div class="price">
-                       
+
             <div class="price-box">
                 <span class="price-result" id="result">0.00€</span>
             </div>
