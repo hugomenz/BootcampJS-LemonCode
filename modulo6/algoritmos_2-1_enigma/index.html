@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en-ES" translate="no">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playground</title>
+    <link rel="stylesheet" href="css/site.css">
+</head>
+
+<body>
+    <div class="enigma-container" id="container">
+        <div>
+            <h2 class="enigma-header">Enigma</h2>
+        </div>
+        <div class="input-container">
+            <textarea id="plain-text" name="plain-text" rows="10" cols="20">Plain Text</textarea>
+        </div>
+        <div class="buttons-container">
+            <button class="encrypt" onclick="enigmaENcryption()">&darr; Encrypt &darr;</button>
+            <button class="decrypt" onclick="enigmaDEcryption()">&uarr; Decrypt &uarr;</button>
+        </div>
+        <div class="output-container">
+            <textarea id="cipher-text" name="cipher-text" rows="10" cols="20" wrap="physical">Cipher Text</textarea>
+        </div>
+
+        <script src="js/with_forloop.js"></script>
+        <script src="js/indexOf.js"></script>
+        <script src="js/encrypt_function.js"></script>
+
+        <script src="js/app.js"></script>
+        
+    </body>
+</html>
