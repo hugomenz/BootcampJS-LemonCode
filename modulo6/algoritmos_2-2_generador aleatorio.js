@@ -20,18 +20,9 @@ var randomPick = (n, min, max) => {
     randomNumber = Math.floor(Math.random() * ( ( max + 1 ) - min ) ) + min;
 
     // array empty --> push first random
-    if ( arr.length === 0 ){
-      arr.push(randomNumber);
-
-    // array not empty, random number in array, new random needed
-    }else if (arr.indexOf(randomNumber) > -1){
-      randomNumber = Math.floor(Math.random() * ( ( max + 1 ) - min ) ) + min;
-
-    // array not empty, random not in array --> push random
-    }else{
+    if (arr.indexOf(randomNumber) == -1){
       arr.push(randomNumber);
     }
-    lastNumber = randomNumber;
   }
   return arr;
 } 
