@@ -1,159 +1,35 @@
-
-// Cuadrado
-var square = (n, char) => {
-    for (var i = 0; i < n; i++ ) console.log( char.repeat(n) );
+var getRightMoneyType = (num, value) => {
+    if ( value > 0 && value < 5) {
+        return num == 1 ? " moneda de " : " monedas de ";
+    } else if (value >= 5){
+        return num == 1 ? " billete de " : " billetes de ";
+    }
 }
 
-console.log("=".repeat(40))
-console.log("Cuadrado")
-console.log("=".repeat(40))
+var getOptimalChange = (price, paidAmount) => {
+    var change = paidAmount - price;
 
-console.log("------ n = 5 ------");
-square(5, "*");
-console.log("");
+    for (let i = cashRegister.length - 1; i >= 0; i--) {
+        var remainder = change / cashRegister[i];
 
-// Cuadrado con Borde
-var squareWithBorder = (n, charBorder, charInner) => {
-    for (var i = 0; i < n; i++ ) {
-        if ( i == 0 || i == n-1 || n < 3 ){
-            console.log( charBorder.repeat(n) );
-        }else {
-            console.log( charBorder + charInner.repeat(n-2) + charBorder )
+        if ((Math.floor(remainder)) > 0) {
+            console.log( Math.floor(remainder)                                      // number coins || bills
+                        + getRightMoneyType(Math.floor(remainder), cashRegister[i]) // moneda, monedas, billete, billetes
+                        + cashRegister[i]                                           // right value
+                        + (cashRegister[i] != 1 ? " euros" : " euro"));             // euro || euros
+
+            change = change - ( Math.floor(remainder) * cashRegister[i] );
         }
     }
 }
-console.log("=".repeat(40))
-console.log("Cuadrado con Borde")
-console.log("=".repeat(40))
 
-console.log("------ n = 1 ------");
-squareWithBorder(1, "B", "*");
-console.log("");
+//
+// Program starts
+//
 
-console.log("------ n = 2 -----");
-squareWithBorder(2, "B", "*");
-console.log("");
+cashRegister = [ 0.01, 0.02, 0.05, 0.1, 0.2, 0.5, 1, 2, 5, 10, 20, 50, 100, 200 ];
 
-console.log("------ n = 5 ------");
-squareWithBorder(5, "B", "*");
-console.log("");
+var purchasedAmount = 152;
+var customerPayment = 200;
 
-// Cuadrado diagonal left-right
-var squareDiagonalLR = (n, charDiagonal, charUp, charDown) => {
-
-    for (var i = 0; i < n; i++ ) {
-        console.log( charDown.repeat(i) + charDiagonal + charUp.repeat(n-i-1) )
-    }
-}
-console.log("=".repeat(40))
-console.log("Cuadrado diagonal left-right")
-console.log("=".repeat(40))
-
-console.log("------ n = 1 ------");
-squareDiagonalLR(1, "\\", "A", "B");
-console.log("");
-
-console.log("------ n = 2 -----");
-squareDiagonalLR(2, "\\", "A", "B");
-console.log("");
-
-console.log("------ n = 5 ------");
-squareDiagonalLR(5, "\\", "A", "B");
-console.log(""); 
-
-// Cuadrado diagonal right-left
-var squareDiagonalLR = (n, charDiagonal, charUp, charDown) => {
-
-    for (var i = 0; i < n; i++ ) {
-        console.log( charUp.repeat(n-i-1) + charDiagonal + charDown.repeat(i) )
-    }
-}
-
-console.log("=".repeat(40))
-console.log("Cuadrado diagonal right-left")
-console.log("=".repeat(40))
-
-console.log("------ n = 1 ------");
-squareDiagonalLR(1, "/", "A", "B");
-console.log("");
-
-console.log("------ n = 2 ------");
-squareDiagonalLR(2, "/", "A", "B");
-console.log("");
-
-console.log("------ n = 5 ------");
-squareDiagonalLR(5, "/", "A", "B");
-console.log("");
-// Medio diamante
-var halfDiamond = (n, char) => {
-    for (var i = 0; i < n; i++ ) console.log( char.repeat(i + 1) );
-    for (var i = 0; i < n; i++ ) console.log( char.repeat(n - i - 1) );
-}
-
-console.log("=".repeat(40))
-console.log("Medio diamante")
-console.log("=".repeat(40))
-
-console.log("------ n = 1 ------");
-halfDiamond(1, "*");
-console.log("");
-
-console.log("------ n = 2 ------");
-halfDiamond(2, "*");
-console.log("");
-
-console.log("------ n = 5 ------");
-halfDiamond(5, "*");
-console.log("");
-
-// Pirámide
-var pyramid = (n, char) => {
-    
-    for (var i = 0; i < n; i++ ) {
-        console.log( " ".repeat( n - i - 1 ) + char.repeat( i + 1 ) + char.repeat( i ));
-    }
-    
-}
-
-console.log("=".repeat(40))
-console.log("Pirámide")
-console.log("=".repeat(40))
-
-console.log("------ n = 1 ------");
-pyramid(1, "*");
-console.log("");
-
-console.log("------ n = 2 ------");
-pyramid(2, "*");
-console.log("");
-
-console.log("------ n = 5 ------");
-pyramid(5, "*");
-console.log("");
-
-
-// Diamante
-var diamond = (n, char) => {
-    for (var i = 0; i < n; i++ ) {
-        console.log( " ".repeat( n - i - 1 ) + char.repeat( i + 1 ) + char.repeat( i ));
-    }
-    for (var i = 0; i < n - 1; i++ ) {
-        console.log( " ".repeat( i + 1 ) + char.repeat( n - i - 1 ) + char.repeat( n - i - 2 ));
-    }
-}
-
-console.log("=".repeat(40))
-console.log("Diamante")
-console.log("=".repeat(40))
-
-console.log("------ n = 1 ------");
-diamond(1, "*");
-console.log("");
-
-console.log("------ n = 2 ------");
-diamond(2, "*");
-console.log("");
-
-console.log("------ n = 5 ------");
-diamond(5, "*");
-console.log("");
+getOptimalChange(purchasedAmount, customerPayment);
