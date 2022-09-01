@@ -8,17 +8,20 @@ var getRightMoneyType = (num, value) => {
 
 var getOptimalChange = (price, paidAmount) => {
     var change = paidAmount - price;
+    console.log("Cantidad a devolver: ", change)
 
     for (let i = cashRegister.length - 1; i >= 0; i--) {
         var remainder = change / cashRegister[i];
 
-        if ((Math.floor(remainder)) > 0) {
-            console.log( Math.floor(remainder)                                      // number coins || bills
+        if ((Math.floor(Math.round(remainder*100)/100)) > 0) {
+
+
+            console.log( Math.floor(Math.round(remainder*100)/100)                                      // number coins || bills
                         + getRightMoneyType(Math.floor(remainder), cashRegister[i]) // moneda, monedas, billete, billetes
                         + cashRegister[i]                                           // right value
                         + (cashRegister[i] != 1 ? " euros" : " euro"));             // euro || euros
 
-            change = change - ( Math.floor(remainder) * cashRegister[i] );
+            change = change - ( Math.floor(Math.round(remainder*100)/100) * cashRegister[i] );
         }
     }
 }
@@ -29,7 +32,7 @@ var getOptimalChange = (price, paidAmount) => {
 
 cashRegister = [ 0.01, 0.02, 0.05, 0.1, 0.2, 0.5, 1, 2, 5, 10, 20, 50, 100, 200 ];
 
-var purchasedAmount = 152;
+var purchasedAmount = 87.23;
 var customerPayment = 200;
 
 getOptimalChange(purchasedAmount, customerPayment);
