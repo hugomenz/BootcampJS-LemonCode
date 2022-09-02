@@ -8,11 +8,10 @@ const createCharacterRow = character => {
     element.appendChild(link);
 
     element.className = "character-row";
-
+    
     return element;
 };
 
-// crea el elemento HTML para representar la imagen
 const createAvatar = character => {
     const element = document.createElement("img");
     element.width = 150;
@@ -37,8 +36,8 @@ const createAvatarDetail = character => {
     return element;
 };
 
-const showCharacter = character => {
-    console.log("character", character);
+const showCharacter = (character, quote) => {
+    //console.log("character", character);
     const characterDetail = document.getElementById("character-detail");
 
     characterDetail.innerHTML = "";
@@ -50,6 +49,19 @@ const showCharacter = character => {
     characterDetail.appendChild(
         createParagraph("Nickname: " + character.nickname)
     );
+    console.log(quote)
+
+    // extra // **************************************
+    if (quote){
+        characterDetail.appendChild(
+            createParagraph("Quote: " + quote.quote)
+        );
+    }else{
+        characterDetail.appendChild(
+            createParagraph("Quote: No Available")
+        );
+    }
+    // ***********************************************
 };
 
 const createParagraph = text => {
