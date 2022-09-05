@@ -109,10 +109,3 @@ reservaTour.bookingList = reservas;
 console.log("----- CASO 2: TOUR -----");
 console.log(reservaTour.subtotal);
 console.log(+reservaTour.total.toFixed(2));
-
-
-
-
-
-
-
