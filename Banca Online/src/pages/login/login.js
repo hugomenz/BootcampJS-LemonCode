@@ -1,6 +1,9 @@
 import { onUpdateField, onSubmitForm, onSetError, onSetFormErrors } from '../../common/helpers'
 import { isValidLogin } from './login.api' 
 import { formValidation } from './login.validations' 
+import { history, routes } from '../../core/router'
+
+
 
 let login = {
     user: '',
@@ -34,13 +37,13 @@ onUpdateField('password', (event) => {
 });
 
 // navigate to next site if credentials OK
-const onNavigate = isValid => {
+const onNavigate = (isValid) => {
     if (isValid){
-        history.pushState(routes.accountList);
+        history.push(routes.accountList);
     }else {
         alert("Usuario y/o contraseña no validos")
     }
-}
+};
 
 onSubmitForm("login-button", () => {
     // from login validations check if inputs are valid
@@ -49,7 +52,7 @@ onSubmitForm("login-button", () => {
         if (result.succeeded){
             // check from the server if credentials are OK
             isValidLogin(login).then(isValid => {
-                console.log({ isValid }); // true / false
+                onNavigate(isValid); // true / false
             });
         }
     });
