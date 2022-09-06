@@ -15,3 +15,8 @@ account-list solo tiene los helpers y el html
 ### para CADA cuenta vamos a poder navegar >> transferencias / movimientos. > Navega ✔️✔️
 
 ### opcion: agregar nueva cuenta.
+
+// history.back()
+// O
+//document.referrer ? window.location = document.referrer : history.back()
+// que se usa n produccion??
