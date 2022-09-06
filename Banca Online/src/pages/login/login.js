@@ -22,17 +22,18 @@ onUpdateField('user', (event) => {
 
 onUpdateField('password', (event) => {
     const value = event.target.value;
+
     login = {
         ...login,
         password: value 
     };
 
-    
     formValidation.validateField('user', login.user).then(result => {
         onSetError('password', result);
     });
 });
 
+// navigate to next site if credentials OK
 const onNavigate = isValid => {
     if (isValid){
         history.pushState(routes.accountList);
@@ -42,9 +43,11 @@ const onNavigate = isValid => {
 }
 
 onSubmitForm("login-button", () => {
+    // from login validations check if inputs are valid
     formValidation.validateForm(login).then(result => {
         onSetFormErrors(result);
         if (result.succeeded){
+            // check from the server if credentials are OK
             isValidLogin(login).then(isValid => {
                 console.log({ isValid }); // true / false
             });
