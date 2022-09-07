@@ -14,9 +14,22 @@ account-list solo tiene los helpers y el html
 
 ### para CADA cuenta vamos a poder navegar >> transferencias / movimientos. > Navega ✔️✔️
 
-### opcion: agregar nueva cuenta.
+### opcion: agregar nueva cuenta. ✔️✔️
 
 // history.back()
 // O
 //document.referrer ? window.location = document.referrer : history.back()
 // que se usa n produccion??
+
+# Sesion 3 ✔️✔️
+
+### consultar los movimientos de una cuenta
+
+- Los datos los recuperamos de movements en data.json y tienen un accountId
+- recuperar los datos e imprimirlos
+- necesitamos los mappers para cambiar formato de los datos!
+
+- En transferencias recoger los parametros para ver id de la cuenta
+- recoger valores formularios
+- validar todos los campos
+- mandar la informacion al sevidor

@@ -4,7 +4,7 @@ export const mapAccountListFromApiToViewModel = accountList => {
         mapAccountFromApiToViewModel(account));
 };
 
-const mapAccountFromApiToViewModel = account => {
+export const mapAccountFromApiToViewModel = account => {
     return {
         id: account.id,
         iban: account.iban,
