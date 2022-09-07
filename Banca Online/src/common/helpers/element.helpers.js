@@ -15,7 +15,11 @@ export const onSubmitForm = (id, callback) => {
   };
 };
 
-export const onSetError = (id, error) => {
+// ##############################################################
+// #############  onSetError MODIFICADO   #######################
+// ##############################################################
+
+/* export const onSetError = (id, error) => {
   if (error.succeeded) {
     removeElementClass(id);
     setErrorMessage(id, '');
@@ -23,7 +27,39 @@ export const onSetError = (id, error) => {
     setElementClass(id);
     setErrorMessage(id, error.message);
   }
+}; */
+
+export const onSetError = (id, error) => {
+  if (error.succeeded) {
+    removeElementClass(id);
+    setErrorMessage(id, '');
+    setErrorMessage('date', '');
+  } else {
+    // ERROR
+    if (id != "day" && id != "month" && id != "year"){
+      setElementClass(id);
+      setErrorMessage(id, error.message);
+      //setErrorMessage('date', '');
+    } else {
+      setElementClass(id);
+      const idSpanish = translateDateElements(id); // error message
+      setErrorMessage('date', `Introduce un ${idSpanish} correcto`);
+    }
+  }
 };
+// ##############################################################
+// ##############################################################
+
+const translateDateElements = dateElement =>{
+  switch (dateElement) {
+    case 'day':
+      return "día";
+    case 'month':
+      return "mes";
+    case 'year':
+      return "año";
+  }
+}
 
 const setElementClass = id => {
   const element = document.getElementById(id);

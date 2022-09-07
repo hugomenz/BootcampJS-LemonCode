@@ -84,6 +84,8 @@
                 type="number"
                 onfocus="this.placeholder=''"
                 placeholder="dd"
+                min = 1
+                max = 31
               />
               <p>/</p>
               <input
@@ -92,6 +94,9 @@
                 type="number"
                 onfocus="this.placeholder=''"
                 placeholder="mm"
+                min = 1
+                max = 12
+
               />
               <p>/</p>
               <input
@@ -100,6 +105,8 @@
                 type="number"
                 onfocus="this.placeholder=''"
                 placeholder="yyyy"
+                min = 2022
+                max = 2100
               />
               <p id="date-error" class="error"></p>
             </div>
@@ -129,5 +136,6 @@
         <img class="footer_logo" src="../../core/content/img/logo_footer.svg" />
       </div>
     </footer>
+    <script src="./transfer.js"></script>
   </body>
 </html>
