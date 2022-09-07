@@ -187,12 +187,15 @@ onSubmitForm("transfer-button", () => {
         year: transfer.year,
         email: transfer.email,
     }
-
+    console.log({transferValidation});
+    console.log({transfer});
     formValidation.validateForm(transferValidation).then(result => {
+        console.log(result);
         onSetFormErrors(result);
         if (result.succeeded){
+            console.log("STOY AKI")
             // check from the server if credentials are OK
-            isValidLogin(transfer).then(isValid => {
+            regTransfer(transfer).then(isValid => {
                 onNavigate(isValid); // true / false
             });
         }
@@ -200,18 +203,9 @@ onSubmitForm("transfer-button", () => {
 });
 
 
-// en el onSubmitForm vas a crear un objeto con los datos adicionales:
-// idAccount, nameAccount y demás cosas
-// El objeto que le pasas
-// ir a la sesion 1 y ver la explicaciuon del validateForm
+
 // FALTA
 // validad amount no simbolos no letras
-// NO MANDA NADA SI EL FORMULARIO ENTEREO NO FUNCIONA!!
-
-
-// ES9721008984150200000948
-// ES9721008984150200000948
-// ES5421008984170200001042
-// ES0721004305712200076760
-// ES8821008984110200004992
-// ES6021004305702200076534
+// EXTRA
+// crear un movimiento en la cuenta con la que hiciste la transferencia
+// crear ventana, resumen transaccion!

@@ -5,12 +5,6 @@ import { dayValidator, monthValidator, yearValidator } from "./transfer.custom.v
 // changing the error messages language
 const validationSchema = {
     field: {
-        selectedAccount: [
-            {
-                validator: Validators.required,
-                message: 'Campo requerido',
-            },
-        ], 
         iban: [
             {
                 validator: Validators.required,

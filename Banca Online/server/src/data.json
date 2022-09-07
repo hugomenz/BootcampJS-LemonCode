@@ -233,6 +233,21 @@
       "transferDate": "",
       "email": "testeo rico papa!!",
       "id": 7
+    },
+    {
+      "idAccount": "yF3a0lf",
+      "nameAccount": "Cuenta de Margi",
+      "iban": "ES9721008984150200000948",
+      "name": "DIOS!",
+      "amount": "123243",
+      "concept": "sds",
+      "notes": "sds",
+      "day": "1",
+      "month": "1",
+      "year": "2022",
+      "transferDate": "1/1/2022",
+      "email": "f@mail.com",
+      "id": 8
     }
   ]
 }
