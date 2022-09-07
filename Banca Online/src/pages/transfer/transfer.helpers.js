@@ -1,3 +1,5 @@
+import { getAccountList } from '../account-list/account-list.api';
+
 const getOption = account => {
   const option = document.createElement('option');
   option.value = account.id;

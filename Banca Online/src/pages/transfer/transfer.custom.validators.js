@@ -1,8 +1,8 @@
 
 
 export const dayValidator = ({ value }) => {
-    const parseValue = parseInt(value);
-    const succeeded = ( parseValue > 0 ) && ( parseValue <= 31 );
+    const parseValue = !!value ? parseInt(value) : '';
+    const succeeded = (!value) || ( parseValue > 0 ) && ( parseValue <= 31 );
 
     return {
         succeeded,
@@ -14,8 +14,8 @@ export const dayValidator = ({ value }) => {
 };
 
 export const monthValidator = ({ value }) => {
-    const parseValue = parseInt(value);
-    const succeeded = ( parseValue > 0 ) && ( parseValue <= 12 );
+    const parseValue = !!value ? parseInt(value) : '';
+    const succeeded = (!value) || (( parseValue > 0 ) && ( parseValue <= 12 ));
 
     return {
         succeeded,
@@ -27,8 +27,8 @@ export const monthValidator = ({ value }) => {
 };
 
 export const yearValidator = ({ value }) => {
-    const parseValue = parseInt(value);
-    const succeeded = ( parseValue > 2021 ) && ( parseValue < 2100 );
+    const parseValue = !!value ? parseInt(value) : '';
+    const succeeded = (!value) || ( parseValue > 2021 ) && ( parseValue < 2100 );
 
     return {
         succeeded,

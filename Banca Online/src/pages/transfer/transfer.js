@@ -4,15 +4,20 @@ import { getAccountList } from '../account-list/account-list.api';
 import { formValidation } from './transfer.validations' 
 import { onUpdateField, onSubmitForm, onSetError, onSetFormErrors } from '../../common/helpers'
 import { regTransfer } from './transfer.api'
-import { getAccount  } from '../account/account.api';
+import { getAccount } from '../account/account.api';
 
+import { userCancelsTransferText, 
+        transactionSummaryText, 
+        insufficientFundsText, 
+        APICancelsTransferText,
+        transferSuccessText } 
+from './transfer.messages'
 
 const params = history.getParams();
-//let actualAccount = 
-getAccountList().then(accountList => {
-    setAccountOptions(accountList, params.id);
-    
-});
+const wasClickedTransferPage = !params.id
+
+let accountBalance = 0;
+let selectedAccountDataDropdwon = {}; 
 
 let transfer = {
     idAccount: params.id,
@@ -29,13 +34,36 @@ let transfer = {
     email: '',
 }
 
-getAccount(params.id).then(apiAccount => { 
-    transfer = {
-        ...transfer,
-        nameAccount: apiAccount.name,
-    }
-});
+let today = new Date().toLocaleDateString();
 
+// if transfer page was open clicking on "Transferencias" 
+if (wasClickedTransferPage){
+    getAccountList().then(accountList => {
+        setAccountOptions(accountList, params.id);
+        
+        //get account id from <select id...> --> there is not info in the url
+        let selectedAccountId = document.getElementById('select-account').value;
+        selectedAccountDataDropdwon = accountList.filter(acc => acc.id == selectedAccountId)[0];
+    });
+
+// if transfer page was selected from an account, get account info too
+}else{
+    getAccountList().then(accountList => {
+        setAccountOptions(accountList, params.id);
+
+        // account data with id from url
+        selectedAccountDataDropdwon = accountList.filter(acc => acc.id == params.id)[0];
+    });
+};
+
+onUpdateField('select-account', (event) => {
+    const value = event.target.value;
+    
+    // account data with id from event
+    getAccountList().then(accountList => {
+        selectedAccountDataDropdwon = accountList.filter(acc => acc.id == value)[0];
+    });
+});
 
 onUpdateField('iban', (event) => {
     const value = event.target.value;
@@ -168,14 +196,38 @@ const onNavigate = (isValid) => {
     if (Boolean(isValid)){
         history.push(routes.accountList);
     }else {
-        alert("Transferecia no realizada")
+        alert(APICancelsTransferText)
     }
 };
 
-
 onSubmitForm("transfer-button", () => {
-    // from login validations check if inputs are valid
+    // si no he seleccionado nada
+    getAccountList().then(accountList => {
+        let selectedAccountId = document.getElementById('select-account').value;
+        selectedAccountDataDropdwon = accountList.filter(acc => acc.id == selectedAccountId)[0];
+    });
 
+    // recover data from account included in the transfer data
+    transfer = {
+        ...transfer,
+        nameAccount: selectedAccountDataDropdwon.name,
+        idAccount: selectedAccountDataDropdwon.id,
+    };
+    // check balance
+    accountBalance = selectedAccountDataDropdwon.balance;
+
+    // if transaction date is empty, it will be today date.
+    if (!transfer.transferDate) {
+        transfer = {
+            ...transfer,
+            day: today.split("/")[0],
+            month: today.split("/")[1],
+            year: today.split("/")[2],
+            transferDate: today,
+        };
+    };
+
+    // my transfer object is bigger than the object for the fields validator 
     let transferValidation = {
         iban: transfer.iban,
         name: transfer.name,
@@ -186,26 +238,24 @@ onSubmitForm("transfer-button", () => {
         month: transfer.month,
         year: transfer.year,
         email: transfer.email,
-    }
-    console.log({transferValidation});
-    console.log({transfer});
+    };
+
     formValidation.validateForm(transferValidation).then(result => {
-        console.log(result);
         onSetFormErrors(result);
-        if (result.succeeded){
-            console.log("STOY AKI")
-            // check from the server if credentials are OK
-            regTransfer(transfer).then(isValid => {
-                onNavigate(isValid); // true / false
-            });
-        }
+        
+        if (result.succeeded){ 
+            if (selectedAccountDataDropdwon.balance >= transfer.amount ){ // funds condition
+                if (confirm(transactionSummaryText(transfer))) { //summary of the transaction
+                    alert(transferSuccessText); // OK
+                    regTransfer(transfer).then(isValid => {
+                        onNavigate(isValid); // true / false
+                    });
+                } else {
+                    alert(userCancelsTransferText); // NO OK
+                };
+            }else{
+                alert(insufficientFundsText(accountBalance, transfer.amount));
+            };
+        };
     });
 });
-
-
-
-// FALTA
-// validad amount no simbolos no letras
-// EXTRA
-// crear un movimiento en la cuenta con la que hiciste la transferencia
-// crear ventana, resumen transaccion!

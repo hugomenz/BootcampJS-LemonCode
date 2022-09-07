@@ -41,27 +41,15 @@ const validationSchema = {
         ], 
         day: [
             {
-                validator: Validators.required,
-                message: 'Campo requerido',
-            },
-            {
                 validator: dayValidator,
             },
         ], 
         month: [
             {
-                validator: Validators.required,
-                message: 'Campo requerido',
-            },
-            {
                 validator: monthValidator,
             },
         ], 
         year: [
-            {
-                validator: Validators.required,
-                message: 'Campo requerido',
-            },
             {
                 validator: yearValidator,
             },
