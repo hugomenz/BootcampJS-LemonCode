@@ -25,7 +25,7 @@ const mapPropertyFromApiToVm = property => {
     };
 };
 
-const getRoomWord = rooms => {
+export const getRoomWord = rooms => {
     return rooms > 1 ? 'habitaciones' : 'habitación';
 };
 
@@ -39,6 +39,5 @@ export const mapFilterToQueryParams = filter => {
     if (filter.minPrice) queryParams = `${queryParams}price_gte=${filter.minPrice}&`;
     if (filter.maxPrice) queryParams = `${queryParams}price_lte=${filter.maxPrice}&`;
 
-    return queryParams.slice(0, -1);
-
-}
+    return queryParams.slice(0, -1); // para eliminar el ultimo &
+};
