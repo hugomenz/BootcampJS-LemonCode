@@ -93,3 +93,32 @@ export const onAddImage = image => {
   imageContainerElement.appendChild(imageElement);
   imagesElement.insertBefore(imageContainerElement, addImageButton);
 };
+
+export const getAllChildsId = parentId => {
+  const parent = document.getElementById(parentId);
+  const children = Array.from(parent.children);
+  
+  return children.map(element => element.id.split('-')[1]);
+}
+
+export const getSelectedCheckbox = parentId => {
+  const parent = document.getElementById(parentId);
+  const children = Array.from(parent.children);
+  
+  let checkedArray = children.map(name => name.control.checked);
+  let selectedCheckboxId = children.map(name => name.control.id.split('-')[0]);
+
+  return selectedCheckboxId.filter((index, id) => checkedArray[id]);
+};
+
+
+export const getAllImages = parentId => {
+  const parent = document.getElementById(parentId);
+  const children = Array.from(parent.children);
+  
+  const onlyImagesBooleanList = children.map(img => img.className == 'add_img');
+
+  return children
+          .filter((index, id) => onlyImagesBooleanList[id])
+          .map(img => img.innerHTML.split('<img src="')[1].split('">')[0]);
+}
