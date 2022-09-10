@@ -5,3 +5,4 @@
   anadido nuevo helper. getAllChildsId
   getSelectedCheckbox
   getAllImages
+  getProvinceIdFromName

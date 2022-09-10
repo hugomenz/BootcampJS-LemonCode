@@ -17,6 +17,3 @@ const provinceListUrl = `${process.env.BASE_API_URL}/provinces`
 export const getProvinceList = () => Axios.get(provinceListUrl).then(response => {
         return response.data;
     });
-
-
-
