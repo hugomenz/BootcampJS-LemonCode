@@ -41,7 +41,7 @@ let generalData = {
     email: '',
     phone: '',
     price: '',
-    saleTypeIds: '',
+    saleTypeIds: [],
     address: '',
     city: '',
     provinceId: '',
@@ -49,9 +49,9 @@ let generalData = {
     rooms: '',
     bathrooms: '',
     locationUrl: '',
-    mainFeatures: '', // array
-    equipmentIds: '', // checkbox
-    images: '',
+    mainFeatures: [], // array
+    equipmentIds: [], // checkbox
+    images: [],
 }
 
 onUpdateField('title', (event => {
@@ -119,8 +119,17 @@ onUpdateField('price', (event => {
     });
 }));
 
-// typeProperty >> from onSubmitForm
+onUpdateField('saleTypes', (() => {
 
+    generalData = {
+        ...generalData,
+        saleTypeIds: getSelectedCheckbox('saleTypes')
+    };
+
+    formValidation.validateField('price', generalData.saleTypeIds).then(result => {
+        onSetError('price', result);
+    }); 
+}));
 
 onUpdateField('address', (event => {
     let value = event.target.value;
@@ -148,7 +157,18 @@ onUpdateField('city', (event => {
     });
 }));
 
-// province >> get Province dropdown! & select prov
+onUpdateField('province', (event => {
+    let value = event.target.value;
+
+    generalData = {
+        ...generalData,
+        provinceId: value
+    };
+
+    formValidation.validateField('province', generalData.provinceId).then(result => {
+        onSetError('provinceId', result);
+    });
+}));
 
 onUpdateField('squareMeter', (event => {
     let value = event.target.value;
@@ -219,19 +239,16 @@ document.getElementById('mainFeatures').addEventListener('click', (event) => {
     onRemoveFeature(feature);
 });
 
+onUpdateField('equipments', (() => {
+    generalData = {
+        ...generalData,
+        equipmentIds: getSelectedCheckbox('equipments'),
+    };
+}));
+
 onAddFile('add-image', value => {
     onAddImage(value);
 });
-
-
-generalData = {
-    ...generalData,
-    saleTypeIds: getSelectedCheckbox('saleTypes'),
-    mainFeatures : getAllChildsId('mainFeatures'),
-    equipmentIds: getSelectedCheckbox('equipments'),
-    images: getAllImages('images'),
-    provinceId: getIdFromSelectedNameOption("province")
-}
 
 // navigate to next site if upload OK
 const onNavigate = (isValid) => {
@@ -242,28 +259,27 @@ const onNavigate = (isValid) => {
     }
 };
 
-onSubmitForm("save-button", () => {
-    // TODO: validadores checkbox
-    // TODO: validadores dropdown
-    // TODO: validadores, telefono (usando pattern, video clase), url, especiales...
-    // TODO: como transferencias >> tener posibilidad de cancelar o aceptar 
-    // TODO: limpiar html con la funcion que se usa en property-list para limpiar html >> mirar si sirve con
+onSubmitForm("save-button", () => { 
+    generalData = {
+        ...generalData,
+        mainFeatures: getAllChildsId('mainFeatures'),
+        images: getAllImages('images'),
+    }
 
     let generalDataValidationObject = mapPropertyDataFromVmToApi(generalData);
-    // TODO: Arreglar validador
+
     // from login validations check if inputs are valid
     formValidation.validateForm(generalDataValidationObject).then(result => {
         onSetFormErrors(result);
-
         if (result.succeeded){
-            alert('Propiedad subida correctamente!');
-            console.log(generalData);
-/*             uploadProperty(generalData).then(isValid => {
-                onNavigate(isValid); // true / false // check if post OK 
-            });*/
-        }else{
-            alert('Rellene por favor los campos requeridos')
-            console.log(result.recordErrors);
-        }
+            if (confirm('Seguro que desea subir esta propiedad?')) {
+                alert('Propiedad subida correctamente!');
+                uploadProperty(generalData).then(isValid => {
+                    onNavigate(isValid); // true / false // check if post OK 
+                }); 
+            }else{
+                alert('Rellene por favor los campos requeridos') // NO OK
+            }
+        };
     });
 });

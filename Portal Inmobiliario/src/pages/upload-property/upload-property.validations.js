@@ -1,4 +1,5 @@
 import { Validators, createFormValidation } from "@lemoncode/fonk";
+import { arrayRequired } from "@lemoncode/fonk-array-required-validator";
 
 // changing the error messages language
 const validationSchema = {
@@ -32,7 +33,8 @@ const validationSchema = {
             },
             {
                 validator: Validators.pattern,
-                message: 'Campo requerido',
+                customArgs: { pattern: /(\+34|0034|34)?[ -]*(6|7|8|9)[ -]*([0-9][ -]*){8}/ },
+                message: 'Teléfono no válido'
             },
         ], 
         price: [
@@ -43,8 +45,9 @@ const validationSchema = {
         ], 
         saleTypes: [
             {
-                validator: Validators.required,
-                message: 'Campo requerido',
+                validator: arrayRequired.validator,
+                message: 'Selecciona al menos 1 elemento!',
+                customArgs: { minLength: 1 },
             },
         ], 
         address: [
@@ -88,26 +91,19 @@ const validationSchema = {
                 validator: Validators.required,
                 message: 'Campo requerido',
             },
+            {
+                validator: Validators.pattern,
+                customArgs: { pattern: /^https:\/\/www\.google\.com\/maps\/embed?/ },
+                message: 'Url no válida',
+            },
         ], 
         mainFeatures: [
             {
-                validator: Validators.required,
-                message: 'Campo requerido',
+                validator: arrayRequired.validator,
+                message: 'Selecciona al menos 1 elemento!',
+                customArgs: { minLength: 1 },
             },
         ], 
-/*         equipmentIds: [
-            {
-                validator: Validators.required,
-                message: 'Campo requerido',
-            },
-        ],  */
-        images: [
-            {
-                validator: Validators.required,
-                message: 'Campo requerido',
-            },
-        ], 
-
     },
 };
 

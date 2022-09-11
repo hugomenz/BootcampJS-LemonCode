@@ -94,10 +94,7 @@ export const onAddImage = image => {
   imagesElement.insertBefore(imageContainerElement, addImageButton);
 };
 
-
-
-
-
+// ############### NUEVAS FUNCIONES
 export const getAllChildsId = parentId => {
   const parent = document.getElementById(parentId);
   const children = Array.from(parent.children);
@@ -126,9 +123,3 @@ export const getAllImages = parentId => {
           .filter((index, id) => onlyImagesBooleanList[id])
           .map(img => img.innerHTML.split('<img src="')[1].split('">')[0]);
 }
-
-
-
-export const getIdFromSelectedNameOption = id => {
-  return document.getElementById(id).value
-} 
