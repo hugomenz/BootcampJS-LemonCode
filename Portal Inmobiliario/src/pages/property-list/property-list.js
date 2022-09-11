@@ -90,4 +90,3 @@ onSubmitForm('search-button', () => {
         loadPropertyList(propertyList)
     });
 });
-

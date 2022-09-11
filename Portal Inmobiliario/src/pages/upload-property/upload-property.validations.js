@@ -100,7 +100,7 @@ const validationSchema = {
         mainFeatures: [
             {
                 validator: arrayRequired.validator,
-                message: 'Selecciona al menos 1 elemento!',
+                message: 'Añade al menos 1 elemento una característica básica!',
                 customArgs: { minLength: 1 },
             },
         ], 

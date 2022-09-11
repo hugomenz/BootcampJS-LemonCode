@@ -107,7 +107,7 @@ onUpdateField('phone', (event => {
 }));
 
 onUpdateField('price', (event => {
-    let value = event.target.value;
+    let value = +event.target.value;
 
     generalData = {
         ...generalData,
@@ -267,7 +267,7 @@ onSubmitForm("save-button", () => {
     }
 
     let generalDataValidationObject = mapPropertyDataFromVmToApi(generalData);
-
+    console.log(generalData)
     // from login validations check if inputs are valid
     formValidation.validateForm(generalDataValidationObject).then(result => {
         onSetFormErrors(result);
@@ -279,6 +279,7 @@ onSubmitForm("save-button", () => {
                 }); 
             }else{
                 alert('Rellene por favor los campos requeridos') // NO OK
+
             }
         };
     });
